@@ -58,6 +58,11 @@ body {
   /* background-color: black; */
 }
 
+#lighticon {
+  border-bottom-left-radius: 10px;
+  font-size: 18px;
+}
+
 button {
   box-sizing: border-box;
   width: 54px;
