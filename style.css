@@ -38,7 +38,7 @@ body {
 
 .calculator-display {
   display: flex;
-  justify-content: end;
+  justify-content: right;
   align-items: center;
   height: 28px;
   padding: 4px 8px;
