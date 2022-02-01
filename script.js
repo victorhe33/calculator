@@ -1,7 +1,7 @@
 //VARIABLES
-let displayVar = "";
-let storedNum;
-let storedOperator;
+let activeNum = "";
+let storedNum = null;
+let storedOperator = null;
 
 //SELECTORS
 const display = document.querySelector(".calculator-display");
@@ -39,28 +39,40 @@ function operate (numA, operator, numB) {
 }
 
 function clearCalc () {
-  displayVar = "";
+  activeNum = "";
   display.textContent = 0;
+  storedNum = null;
+  storedOperator = null;
 }
 
 //click handlers
 function handleDisplayClick (e) {
   let newEntry = e.target.innerText;
-  displayVar += newEntry;
-  display.textContent = displayVar;
+  activeNum += newEntry;
+  display.textContent = activeNum;
 }
 
 function handleOperatorClick (e) {
-  storedNum = Number(displayVar);
+  if (storedOperator === null) { //account for operator chains.
+    storedNum = Number(activeNum);
+  } else {
+    let secondNum = Number(activeNum)
+    storedNum = operate(storedNum, storedOperator, secondNum);
+    display.textContent = storedNum;
+  }
+
   storedOperator = e.target.id;
-  displayVar = "";
+  activeNum = "";
 }
 
 function handleCalculateClick (e) {
-  let secondNum = Number(displayVar)
+  if (storedNum === null) { //prevent error when no calculations have been made.
+    return;
+  }
+
+  let secondNum = Number(activeNum)
   let result = operate(storedNum, storedOperator, secondNum);
   display.textContent = result;
-  displayVar = "";
 }
 
 //EVENT LISTENERS
