@@ -52,14 +52,13 @@ body {
 .calculator-buttons {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   flex-grow: 1;
   gap: 1px;
   /* background-color: black; */
 }
 
 #lighticon {
-  border-bottom-left-radius: 10px;
   font-size: 18px;
 }
 
