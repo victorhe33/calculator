@@ -56,11 +56,18 @@ function handleNumberClick (e) {
     clearCalc();
   } 
 
-  if (calcPressed === true) {
+  if (calcPressed === true) {//handle post calc number presses
     activeNum = "";
     calcPressed = false;
   }
 
+  //handle "0" issues. long 0 strings, 0 before digits.
+  if (activeNum === "0" && e.target.innerText === "0" 
+    || activeNum === "" && e.target.innerText === "0") { 
+    return;
+  }
+
+  //Primary function logic
   let newEntry = e.target.innerText;
   console.log(activeNum);
   if (activeNum.length < 17) { //limit number length to fit display
@@ -70,7 +77,7 @@ function handleNumberClick (e) {
 }
 
 function handleOperatorClick (e) {
-  if (activeNum === "") {
+  if (activeNum === "") { //handle changes in operator click.
     storedOperator = e.target.id;
     return;
   }
@@ -89,10 +96,12 @@ function handleOperatorClick (e) {
 }
 
 function handleCalculateClick (e) {
-  if (storedNum === null || activeNum === "") { //prevent error when no calculations have been made.
+  //prevent error when no calculations have been made.
+  if (storedNum === null || activeNum === "") { 
     return;
   }
 
+  //Primary function logic
   let secondNum = Number(activeNum)
   let result = operate(storedNum, storedOperator, secondNum);
   if (String(result).length > 16) { //confirm result fits in display
