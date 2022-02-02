@@ -3,6 +3,7 @@ let activeNum = "";
 let storedNum = null;
 let storedOperator = null;
 let calcPressed = false; //avoids number presses adding to post = result.
+let percentPressed = false; //track percent state
 
 //SELECTORS
 const display = document.querySelector(".calculator-display");
@@ -10,6 +11,8 @@ const numberButtons = document.querySelectorAll(".number");
 const clearButton = document.querySelector("#clear");
 const operatorButtons = document.querySelectorAll(".operator");
 const calculateButton = document.querySelector("#calculate");
+const posNegButton = document.querySelector("#posNeg")
+const percentButton = document.querySelector("#percent")
 
 
 const addButton = document.querySelector(".add");
@@ -48,6 +51,8 @@ function clearCalc () {
   display.textContent = 0;
   storedNum = null;
   storedOperator = null;
+  calcPressed = false;
+  percentPressed = false;
 }
 
 //click handlers
@@ -86,12 +91,14 @@ function handleOperatorClick (e) {
     storedOperator = e.target.id;
     storedNum = Number(activeNum);
     activeNum = "";
+    percentPressed = false;
   } else {
     let secondNum = Number(activeNum)
     storedNum = operate(storedNum, storedOperator, secondNum)
     display.textContent = storedNum;
     storedOperator = e.target.id;
     activeNum = "";
+    percentPressed = false;
   }
 }
 
@@ -112,20 +119,36 @@ function handleCalculateClick (e) {
   storedNum = null;
   activeNum = result;
   calcPressed = true;
+  percentPressed = false;
 }
 
-//clean display output to fit + floating decimal management. max = 17
-// function sanitizeDisplay(dirtyString) {
-//   if (typeof dirtyString === "number") {
-//     let confirmedString = String(dirtyString)
-//   }
-//   let shortenedString = confirmedString.slice(0, 17);
+//ADJUNCT FEATURES
+function handlePosNegClick () {
+  if (activeNum === "") {
+    return;
+  }
 
-//   return shortenedString;
-// }
+  activeNum *= -1;
+  display.textContent = activeNum;
+}
+
+function handlePercentClick () {
+  if (activeNum === "") {
+    return;
+  }
+
+  if (percentPressed === false) {
+    activeNum *= .01;
+    display.textContent = activeNum;
+  }
+  percentPressed = true;
+}
 
 //EVENT LISTENERS
 numberButtons.forEach(button => button.addEventListener("click", handleNumberClick));
 clearButton.addEventListener("click", clearCalc);
 operatorButtons.forEach(button => button.addEventListener("click", handleOperatorClick));
-calculateButton.addEventListener("click", handleCalculateClick)
+calculateButton.addEventListener("click", handleCalculateClick);
+//ADJUNCT FEATURES
+posNegButton.addEventListener("click", handlePosNegClick);
+percentButton.addEventListener("click", handlePercentClick);
