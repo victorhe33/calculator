@@ -46,14 +46,28 @@ function operate (numA, operator, numB) {
 
 function clearCalc () {
   activeNum = "";
-  display.textContent = 0;
+  // display.textContent = 0;
+  populateDisplay(0);
   storedNum = null;
   storedOperator = null;
   calcPressed = false;
   percentPressed = false;
 }
 
-//click handlers
+//serves to display and also santize output ie. decimals rounding.
+function populateDisplay (input) {
+  let result = String(input);
+  
+  if (result.includes(".")) {
+    result = result.slice(0, 16);
+  } else if (result.length > 16){
+    result = "Error";
+  }
+
+  display.textContent = result;
+}
+
+//CLICK HANDLERS
 function handleNumberClick (e) {
   if (display.textContent === "Error") {//reset after errors
     clearCalc();
@@ -76,7 +90,8 @@ function handleNumberClick (e) {
   if (activeNum.length < 17) { //limit number length to fit display
     activeNum += newEntry;
   }
-  display.textContent = activeNum;
+  // display.textContent = activeNum;
+  populateDisplay(activeNum);
 }
 
 function handleOperatorClick (e) {
@@ -93,7 +108,8 @@ function handleOperatorClick (e) {
   } else {
     let secondNum = Number(activeNum)
     storedNum = operate(storedNum, storedOperator, secondNum)
-    display.textContent = storedNum;
+    // display.textContent = storedNum;
+    populateDisplay(storedNum);
     storedOperator = e.target.id;
     activeNum = "";
     percentPressed = false;
@@ -109,10 +125,11 @@ function handleCalculateClick (e) {
   //Primary function logic
   let secondNum = Number(activeNum)
   let result = operate(storedNum, storedOperator, secondNum);
-  if (String(result).length > 16) { //confirm result fits in display
-    result = "Error";
-  }
-  display.textContent = result;
+  // if (String(result).length > 16) { //confirm result fits in display
+  //   result = "Error";
+  // }
+  // display.textContent = result;
+  populateDisplay(result);
   storedOperator = null;
   storedNum = null;
   activeNum = result;
@@ -127,7 +144,8 @@ function handlePosNegClick () {
   }
 
   activeNum *= -1;
-  display.textContent = activeNum;
+  // display.textContent = activeNum;
+  populateDisplay(activeNum);
 }
 
 function handlePercentClick () {
@@ -137,7 +155,8 @@ function handlePercentClick () {
 
   if (percentPressed === false) {
     activeNum *= .01;
-    display.textContent = activeNum;
+    // display.textContent = activeNum;
+    populateDisplay(activeNum);
   }
   percentPressed = true;
 }
@@ -153,7 +172,8 @@ function handleDecimalClick () {
 
   activeNum = String(activeNum);
   activeNum += ".";
-  display.textContent = activeNum;
+  // display.textContent = activeNum;
+  populateDisplay(activeNum);
 }
 
 //EVENT LISTENERS
