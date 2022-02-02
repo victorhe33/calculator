@@ -162,7 +162,7 @@ function handlePercentClick () {
 }
 
 function handleDecimalClick () {
-  if(activeNum.includes(".")) {
+  if(String(activeNum).includes(".")) {
     return;
   }
   
