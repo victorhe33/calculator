@@ -11,8 +11,9 @@ const numberButtons = document.querySelectorAll(".number");
 const clearButton = document.querySelector("#clear");
 const operatorButtons = document.querySelectorAll(".operator");
 const calculateButton = document.querySelector("#calculate");
-const posNegButton = document.querySelector("#posNeg")
-const percentButton = document.querySelector("#percent")
+const posNegButton = document.querySelector("#posNeg");
+const percentButton = document.querySelector("#percent");
+const decimalButton = document.querySelector("#decimal");
 
 
 const addButton = document.querySelector(".add");
@@ -144,6 +145,20 @@ function handlePercentClick () {
   percentPressed = true;
 }
 
+function handleDecimalClick () {
+  if(activeNum.includes(".")) {
+    return;
+  }
+  
+  if (activeNum === "") {
+    activeNum += 0;
+  }
+
+  activeNum = String(activeNum);
+  activeNum += ".";
+  display.textContent = activeNum;
+}
+
 //EVENT LISTENERS
 numberButtons.forEach(button => button.addEventListener("click", handleNumberClick));
 clearButton.addEventListener("click", clearCalc);
@@ -152,3 +167,4 @@ calculateButton.addEventListener("click", handleCalculateClick);
 //ADJUNCT FEATURES
 posNegButton.addEventListener("click", handlePosNegClick);
 percentButton.addEventListener("click", handlePercentClick);
+decimalButton.addEventListener("click", handleDecimalClick);
