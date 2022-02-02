@@ -58,6 +58,7 @@ function handleNumberClick (e) {
 
   if (calcPressed === true) {
     activeNum = "";
+    calcPressed = false;
   }
 
   let newEntry = e.target.innerText;
