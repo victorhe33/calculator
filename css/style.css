@@ -46,7 +46,7 @@ body {
   background-color: rgb(9, 31, 44);
   border-radius: 5px;
   color: rgb(147, 232, 211);
-  border: gray solid 1px;
+  border: black solid 0px;
 }
 
 .calculator-buttons {
