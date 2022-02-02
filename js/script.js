@@ -15,9 +15,6 @@ const posNegButton = document.querySelector("#posNeg");
 const percentButton = document.querySelector("#percent");
 const decimalButton = document.querySelector("#decimal");
 
-
-const addButton = document.querySelector(".add");
-
 //FUNCTIONS
 function add (numA, numB) {
   return numA + numB;
