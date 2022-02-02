@@ -62,7 +62,10 @@ function handleNumberClick (e) {
   }
 
   let newEntry = e.target.innerText;
-  activeNum += newEntry;
+  console.log(activeNum);
+  if (activeNum.length < 17) { //limit number length to fit display
+    activeNum += newEntry;
+  }
   display.textContent = activeNum;
 }
 
@@ -79,8 +82,8 @@ function handleOperatorClick (e) {
   } else {
     let secondNum = Number(activeNum)
     storedNum = operate(storedNum, storedOperator, secondNum)
-    storedOperator = e.target.id;
     display.textContent = storedNum;
+    storedOperator = e.target.id;
     activeNum = "";
   }
 }
@@ -92,12 +95,25 @@ function handleCalculateClick (e) {
 
   let secondNum = Number(activeNum)
   let result = operate(storedNum, storedOperator, secondNum);
+  if (String(result).length > 16) { //confirm result fits in display
+    result = "Error";
+  }
   display.textContent = result;
   storedOperator = null;
   storedNum = null;
   activeNum = result;
   calcPressed = true;
 }
+
+//clean display output to fit + floating decimal management. max = 17
+// function sanitizeDisplay(dirtyString) {
+//   if (typeof dirtyString === "number") {
+//     let confirmedString = String(dirtyString)
+//   }
+//   let shortenedString = confirmedString.slice(0, 17);
+
+//   return shortenedString;
+// }
 
 //EVENT LISTENERS
 numberButtons.forEach(button => button.addEventListener("click", handleNumberClick));
