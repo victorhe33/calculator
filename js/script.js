@@ -58,7 +58,7 @@ function clearCalc () {
 function populateDisplay (input) {
   let result = String(input);
   
-  if (result.includes(".")) {
+  if (result.includes(".") && !result.includes("e")) { //stop exponent format
     result = result.slice(0, 16);
   } else if (result.length > 16){
     result = "Error";
@@ -174,6 +174,7 @@ function handleDecimalClick () {
   activeNum += ".";
   // display.textContent = activeNum;
   populateDisplay(activeNum);
+  calcPressed = false;
 }
 
 //EVENT LISTENERS
