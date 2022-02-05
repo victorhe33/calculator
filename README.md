@@ -6,8 +6,8 @@ Calculator project practicing use of HTML, CSS, JS.
 
 Fully functioning calculator featuring: 
 
--Light/dark modes
--Keyboard input functionality
+- Light/dark modes
+- Keyboard input functionality
 
 
 ## Acknowledgments
