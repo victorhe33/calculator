@@ -14,25 +14,26 @@ const calculateButton = document.querySelector("#calculate");
 const posNegButton = document.querySelector("#posNeg");
 const percentButton = document.querySelector("#percent");
 const decimalButton = document.querySelector("#decimal");
+const lightModeButton = document.querySelector("#lightmode")
 
 //FUNCTIONS
-function add (numA, numB) {
+function add(numA, numB) {
   return numA + numB;
 }
 
-function subtract (numA, numB) {
+function subtract(numA, numB) {
   return numA - numB;
 }
 
-function multiply (numA, numB) {
+function multiply(numA, numB) {
   return numA * numB;
 }
 
-function divide (numA, numB) {
+function divide(numA, numB) {
   return numA / numB;
 }
 
-function operate (numA, operator, numB) {
+function operate(numA, operator, numB) {
   if (operator === "divide" && numB === 0) { //account for divide by 0
     return "Error"
   }
@@ -44,7 +45,7 @@ function operate (numA, operator, numB) {
        : "Error";
 }
 
-function clearCalc () {
+function clearCalc() {
   activeNum = "";
   // display.textContent = 0;
   populateDisplay(0);
@@ -55,7 +56,7 @@ function clearCalc () {
 }
 
 //serves to display and also santize output ie. decimals rounding.
-function populateDisplay (input) {
+function populateDisplay(input) {
   let result = String(input);
   
   if (result.includes(".") && !result.includes("e")) { //stop exponent format
@@ -68,7 +69,7 @@ function populateDisplay (input) {
 }
 
 //CLICK HANDLERS
-function handleNumberClick (e) {
+function handleNumberClick(e) {
   if (display.textContent === "Error") {//reset after errors
     clearCalc();
   } 
@@ -94,7 +95,7 @@ function handleNumberClick (e) {
   populateDisplay(activeNum);
 }
 
-function handleOperatorClick (e) {
+function handleOperatorClick(e) {
   if (activeNum === "") { //handle changes in operator click.
     storedOperator = e.target.id;
     return;
@@ -116,7 +117,7 @@ function handleOperatorClick (e) {
   }
 }
 
-function handleCalculateClick (e) {
+function handleCalculateClick(e) {
   //prevent error when no calculations have been made.
   if (storedNum === null || activeNum === "") { 
     return;
@@ -138,7 +139,7 @@ function handleCalculateClick (e) {
 }
 
 //ADJUNCT FEATURES
-function handlePosNegClick () {
+function handlePosNegClick() {
   if (activeNum === "") {
     return;
   }
@@ -148,7 +149,7 @@ function handlePosNegClick () {
   populateDisplay(activeNum);
 }
 
-function handlePercentClick () {
+function handlePercentClick() {
   if (activeNum === "") {
     return;
   }
@@ -161,7 +162,7 @@ function handlePercentClick () {
   percentPressed = true;
 }
 
-function handleDecimalClick () {
+function handleDecimalClick() {
   if(String(activeNum).includes(".")) {
     return;
   }
@@ -177,6 +178,18 @@ function handleDecimalClick () {
   calcPressed = false;
 }
 
+function handleLightModeClick() {
+  let calculator = document.querySelector(".calculator");
+  let calcDisplay = document.querySelector(".calculator-display");
+  let buttons = document.querySelectorAll("button");
+
+  console.log("light mode")
+
+  calculator.classList.toggle("dark-mode");
+  calcDisplay.classList.toggle("dark-mode");
+  buttons.forEach(button => button.classList.toggle("dark-mode"));
+}
+
 //EVENT LISTENERS
 numberButtons.forEach(button => button.addEventListener("click", handleNumberClick));
 clearButton.addEventListener("click", clearCalc);
@@ -186,3 +199,4 @@ calculateButton.addEventListener("click", handleCalculateClick);
 posNegButton.addEventListener("click", handlePosNegClick);
 percentButton.addEventListener("click", handlePercentClick);
 decimalButton.addEventListener("click", handleDecimalClick);
+lightModeButton.addEventListener("click", handleLightModeClick);

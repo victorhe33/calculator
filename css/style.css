@@ -6,6 +6,7 @@
 }
 
 video {
+  z-index: -1;
   object-fit: cover;
   width: 100vw;
   height: 100vh;
@@ -17,14 +18,37 @@ video {
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100vh;
   background-color: black;
 }
 
+.header,
+.footer {
+  display: flex;
+  background-color: rgb(9, 31, 44);
+  color: rgb(147, 232, 211);
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  height: 6%;
+  font-size: 20px;
+}
+
+.footer {
+  height: 20px;
+}
+
+.center {
+  
+}
+
 .calculator {
-  position: absolute;
+  /* position: absolute; */
   width: 220px;
   height: 250px;
   display: flex;
@@ -34,6 +58,11 @@ body {
   padding: 6px;
   background-color: rgb(162, 136, 217);
   gap: 6px;
+}
+
+.calculator.dark-mode {
+  border: solid black 1px;
+  background-color: lightgray;
 }
 
 .calculator-display {
@@ -47,6 +76,15 @@ body {
   border-radius: 5px;
   color: rgb(147, 232, 211);
   border: black solid 0px;
+}
+
+.calculator-display.dark-mode {
+  background-color: rgba(128, 128, 128, 0.551);
+  /* height: 26px;
+  padding: 4px 7px; */
+  color: black;
+  /* border: gray solid 1px; */
+
 }
 
 .calculator-buttons {
@@ -75,6 +113,13 @@ button {
   border-radius: 0px;
   background-color: rgb(9, 31, 44);
   color: rgb(147, 232, 211);
+}
+
+button.dark-mode {
+  box-sizing: border-box;
+  /* border: solid gray 1px; */
+  background-color: rgba(128, 128, 128, 0.551); 
+  color: black;
 }
 
 button:hover {
