@@ -14,7 +14,7 @@ const calculateButton = document.querySelector("#calculate");
 const posNegButton = document.querySelector("#posNeg");
 const percentButton = document.querySelector("#percent");
 const decimalButton = document.querySelector("#decimal");
-const lightModeButton = document.querySelector("#lightmode")
+const lightModeButton = document.querySelector("#lightmode");
 
 //FUNCTIONS
 function add(numA, numB) {
@@ -35,7 +35,7 @@ function divide(numA, numB) {
 
 function operate(numA, operator, numB) {
   if (operator === "divide" && numB === 0) { //account for divide by 0
-    return "Error"
+    return "Error";
   }
 
   return operator === "add" ? add(numA, numB)
@@ -47,7 +47,6 @@ function operate(numA, operator, numB) {
 
 function clearCalc() {
   activeNum = "";
-  // display.textContent = 0;
   populateDisplay(0);
   storedNum = null;
   storedOperator = null;
@@ -123,7 +122,7 @@ function handleCalculateClick(e) {
   }
 
   //Primary function logic
-  let secondNum = Number(activeNum)
+  let secondNum = Number(activeNum);
   let result = operate(storedNum, storedOperator, secondNum);
 
   populateDisplay(result);
@@ -181,6 +180,18 @@ function handleLightModeClick() {
   buttons.forEach(button => button.classList.toggle("light-mode"));
 }
 
+function keyDown(e) {
+  let keyedButton;
+
+  if(e.shiftKey) {
+    keyedButton = document.querySelector(`button[data-key="${e.keyCode}s"]`);
+  } else {
+    keyedButton = document.querySelector(`button[data-key="${e.keyCode}"]`);
+  }
+
+  keyedButton.click();
+}
+
 //EVENT LISTENERS
 numberButtons.forEach(button => button.addEventListener("click", handleNumberClick));
 clearButton.addEventListener("click", clearCalc);
@@ -191,3 +202,4 @@ posNegButton.addEventListener("click", handlePosNegClick);
 percentButton.addEventListener("click", handlePercentClick);
 decimalButton.addEventListener("click", handleDecimalClick);
 lightModeButton.addEventListener("click", handleLightModeClick);
+window.addEventListener("keydown", keyDown);
