@@ -55,7 +55,7 @@ function clearCalc() {
   percentPressed = false;
 }
 
-//serves to display and also santize output ie. decimals rounding.
+//display and also santize output ie. decimal cutoff.
 function populateDisplay(input) {
   let result = String(input);
   
@@ -109,7 +109,6 @@ function handleOperatorClick(e) {
   } else {
     let secondNum = Number(activeNum)
     storedNum = operate(storedNum, storedOperator, secondNum)
-    // display.textContent = storedNum;
     populateDisplay(storedNum);
     storedOperator = e.target.id;
     activeNum = "";
@@ -126,10 +125,7 @@ function handleCalculateClick(e) {
   //Primary function logic
   let secondNum = Number(activeNum)
   let result = operate(storedNum, storedOperator, secondNum);
-  // if (String(result).length > 16) { //confirm result fits in display
-  //   result = "Error";
-  // }
-  // display.textContent = result;
+
   populateDisplay(result);
   storedOperator = null;
   storedNum = null;
@@ -145,7 +141,6 @@ function handlePosNegClick() {
   }
 
   activeNum *= -1;
-  // display.textContent = activeNum;
   populateDisplay(activeNum);
 }
 
@@ -156,7 +151,6 @@ function handlePercentClick() {
 
   if (percentPressed === false) {
     activeNum *= .01;
-    // display.textContent = activeNum;
     populateDisplay(activeNum);
   }
   percentPressed = true;
@@ -173,7 +167,6 @@ function handleDecimalClick() {
 
   activeNum = String(activeNum);
   activeNum += ".";
-  // display.textContent = activeNum;
   populateDisplay(activeNum);
   calcPressed = false;
 }
@@ -183,11 +176,9 @@ function handleLightModeClick() {
   let calcDisplay = document.querySelector(".calculator-display");
   let buttons = document.querySelectorAll("button");
 
-  console.log("light mode")
-
-  calculator.classList.toggle("dark-mode");
-  calcDisplay.classList.toggle("dark-mode");
-  buttons.forEach(button => button.classList.toggle("dark-mode"));
+  calculator.classList.toggle("light-mode");
+  calcDisplay.classList.toggle("light-mode");
+  buttons.forEach(button => button.classList.toggle("light-mode"));
 }
 
 //EVENT LISTENERS
