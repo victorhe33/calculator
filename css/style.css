@@ -45,7 +45,7 @@ body {
 }
 
 .calculator {
-  width: clamp(220px, 60vw, 1000px); /* 220px; */
+  width: clamp(220px, 60vw, 800px); /* 220px; */
   height: max(35vh, 250px);  /* 250px; */
   display: flex;
   flex-direction: column;
@@ -97,7 +97,7 @@ body {
 
 button {
   box-sizing: border-box;
-  width: clamp(54px, calc((60vw - 10px) / 4), 249px); /*54px;*/
+  width: clamp(54px, calc((60vw - 10px) / 4), 199px); /*54px;*/
   font-size: clamp(15px, 4vw, 30px); /*15px*/
   text-decoration: none;
   border: solid black 0px;
