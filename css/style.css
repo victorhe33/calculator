@@ -29,23 +29,24 @@ body {
   display: flex;
   background-color: rgb(9, 31, 44);
   color: rgb(147, 232, 211);
-  width: 100%;
+  width: 100vw;
   justify-content: center;
   align-items: center;
 }
 
 .header {
-  height: 6%;
-  font-size: 20px;
+  height: 8vh;
+  font-size: 3vh;
 }
 
 .footer {
-  height: 20px;
+  height: 4vh;
+  font-size: 1.5vh;
 }
 
 .calculator {
-  width: 220px;
-  height: 250px;
+  width: clamp(220px, 60vw, 1000px); /* 220px; */
+  height: max(35vh, 250px);  /* 250px; */
   display: flex;
   flex-direction: column;
   border: solid black 1px;
@@ -64,9 +65,9 @@ body {
   display: flex;
   justify-content: right;
   align-items: center;
-  height: 28px;
+  height: max(4vh, 28px); /*max(28px);*/
   padding: 4px 8px;
-  font-size: 20px;
+  font-size: 3vh; /*20px; */
   background-color: rgb(9, 31, 44);
   border-radius: 5px;
   color: rgb(147, 232, 211);
@@ -87,17 +88,17 @@ body {
 }
 
 #posNeg {
-  font-size: 12px;
+  font-size: clamp(12px, 4vw, 24px); /*12px*/
 }
 
 #lightmode {
-  font-size: 16px;
+  font-size: clamp(16px, 4vw, 32px); /*16px;*/
 }
 
 button {
   box-sizing: border-box;
-  width: 54px;
-  font-size: 15px;
+  width: clamp(54px, calc((60vw - 10px) / 4), 249px); /*54px;*/
+  font-size: clamp(15px, 4vw, 30px); /*15px*/
   text-decoration: none;
   border: solid black 0px;
   border-radius: 0px;
